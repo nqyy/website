@@ -46,7 +46,7 @@
 
         p {
             margin-bottom: 1rem;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
 
         main {
@@ -59,7 +59,31 @@
 
         span {
             display: inline-block;
+            position: relative;
             animation: fall var(--d) linear var(--t) forwards;
+        }
+
+        /* The thread each character hangs from, fading into the dark above it. */
+        span::before {
+            content: "";
+            position: absolute;
+            left: calc(50% - 0.5px);
+            bottom: calc(100% - 9px);
+            width: 1px;
+            height: 20px;
+            background: linear-gradient(to top, #fff, transparent);
+            opacity: 0.22;
+            transform-origin: top;
+            z-index: -1;
+            animation: snap 0.22s linear calc(var(--t) - 0.1s) forwards;
+        }
+
+        /* One hard frame of spark, then the cut end whips upward. */
+        @keyframes snap {
+            0%   { opacity: 0.22; transform: scaleY(1); animation-timing-function: steps(1, end); }
+            25%  { opacity: 1; transform: scaleY(1) scaleX(3); }
+            45%  { opacity: 1; transform: scaleY(1) scaleX(1); animation-timing-function: cubic-bezier(0.3, 0, 0.1, 1); }
+            100% { opacity: 0; transform: scaleY(0) scaleX(1); }
         }
 
         /* Slack, then the give, then gravity: vertical travel is sampled along a
@@ -82,10 +106,10 @@
 <body>    
     <main>
         <p>
-            <span style="--t:5.06s;--d:0.96s;--x:-59px;--r:52deg;--y:calc(50vh + 21px)">生</span><span style="--t:5.00s;--d:0.89s;--x:38px;--r:-38deg;--y:calc(50vh - 17px)">死</span><span style="--t:5.33s;--d:0.96s;--x:-38px;--r:88deg;--y:calc(50vh + 17px)">去</span><span style="--t:5.13s;--d:0.96s;--x:77px;--r:-14deg;--y:calc(50vh + 19px)">来</span><br>
-            <span style="--t:5.47s;--d:0.89s;--x:-94px;--r:27deg;--y:calc(50vh - 16px)">棚</span><span style="--t:5.21s;--d:0.80s;--x:3px;--r:-66deg;--y:calc(50vh - 80px)">頭</span><span style="--t:5.63s;--d:0.80s;--x:49px;--r:41deg;--y:calc(50vh - 76px)">傀</span><span style="--t:5.38s;--d:0.91s;--x:-97px;--r:-95deg;--y:calc(50vh - 12px)">儡</span><br>
-            <span style="--t:5.09s;--d:0.77s;--x:131px;--r:19deg;--y:calc(50vh - 93px)">一</span><span style="--t:5.72s;--d:0.77s;--x:-101px;--r:-47deg;--y:calc(50vh - 97px)">線</span><span style="--t:5.27s;--d:0.83s;--x:-3px;--r:73deg;--y:calc(50vh - 61px)">断</span><span style="--t:5.54s;--d:0.78s;--x:-79px;--r:-23deg;--y:calc(50vh - 91px)">時</span><br>
-            <span style="--t:5.17s;--d:0.67s;--x:114px;--r:61deg;--y:calc(50vh - 156px)">落</span><span style="--t:5.68s;--d:0.77s;--x:-66px;--r:-81deg;--y:calc(50vh - 100px)">落</span><span style="--t:5.43s;--d:0.74s;--x:118px;--r:34deg;--y:calc(50vh - 116px)">磊</span><span style="--t:5.58s;--d:0.67s;--x:7px;--r:-57deg;--y:calc(50vh - 152px)">磊</span>
+            <span style="--t:10.01s;--d:0.96s;--x:-59px;--r:52deg;--y:calc(50vh + 21px)">生</span><span style="--t:10.00s;--d:0.89s;--x:38px;--r:-38deg;--y:calc(50vh - 17px)">死</span><span style="--t:10.07s;--d:0.96s;--x:-38px;--r:88deg;--y:calc(50vh + 17px)">去</span><span style="--t:10.03s;--d:0.96s;--x:77px;--r:-14deg;--y:calc(50vh + 19px)">来</span><br>
+            <span style="--t:10.10s;--d:0.89s;--x:-94px;--r:27deg;--y:calc(50vh - 16px)">棚</span><span style="--t:10.04s;--d:0.80s;--x:3px;--r:-66deg;--y:calc(50vh - 80px)">頭</span><span style="--t:10.13s;--d:0.80s;--x:49px;--r:41deg;--y:calc(50vh - 76px)">傀</span><span style="--t:10.08s;--d:0.91s;--x:-97px;--r:-95deg;--y:calc(50vh - 12px)">儡</span><br>
+            <span style="--t:10.02s;--d:0.77s;--x:131px;--r:19deg;--y:calc(50vh - 93px)">一</span><span style="--t:10.15s;--d:0.77s;--x:-101px;--r:-47deg;--y:calc(50vh - 97px)">線</span><span style="--t:10.06s;--d:0.83s;--x:-3px;--r:73deg;--y:calc(50vh - 61px)">断</span><span style="--t:10.11s;--d:0.78s;--x:-79px;--r:-23deg;--y:calc(50vh - 91px)">時</span><br>
+            <span style="--t:10.04s;--d:0.67s;--x:114px;--r:61deg;--y:calc(50vh - 156px)">落</span><span style="--t:10.14s;--d:0.77s;--x:-66px;--r:-81deg;--y:calc(50vh - 100px)">落</span><span style="--t:10.09s;--d:0.74s;--x:118px;--r:34deg;--y:calc(50vh - 116px)">磊</span><span style="--t:10.12s;--d:0.67s;--x:7px;--r:-57deg;--y:calc(50vh - 152px)">磊</span>
         </p>
     </main>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"3b9ad7331e754039948ce59cd5546ebb","r":1,"spa":2}' crossorigin="anonymous"></script>
