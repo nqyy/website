@@ -25,11 +25,15 @@
             box-sizing: border-box;
         }
 
+        html {
+            overflow: hidden;
+        }
+
         body {
             font-family: 'Brush Script MT', 'Brush Script', cursive;
             line-height: 1.8;
-            color: #555;
-            background: #fff;
+            color: #fff;
+            background: #000;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -37,7 +41,7 @@
             align-items: center;
             text-align: center;
             padding: 2rem;
-            animation: invert 0.3s steps(1, end) 10s 6 forwards;
+            overflow: hidden;
         }
 
         p {
@@ -45,26 +49,43 @@
             font-size: 1.5rem;
         }
 
-        @keyframes invert {
-            0%   { background: #fff; color: #555; }
-            50%  { background: #000; color: #fff; }
-            100% { background: #000; color: transparent; }
+        main {
+            animation: appear 2s ease 0.3s backwards;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            body {
-                animation: invert 1.5s ease 3s forwards;
-            }
+        @keyframes appear {
+            from { opacity: 0; }
+        }
+
+        span {
+            display: inline-block;
+            animation: fall var(--d) linear var(--t) forwards;
+        }
+
+        /* Slack, then the give, then gravity: vertical travel is sampled along a
+           parabola while drift and spin stay linear. */
+        @keyframes fall {
+            0%   { transform: translate(0, 0) rotate(0deg); animation-timing-function: ease-out; }
+            5%   { transform: translate(0, 3px) rotate(calc(var(--r) * 0.06)); }
+            12%  { transform: translate(calc(var(--x) * 0.02), 8px) rotate(calc(var(--r) * 0.15)); }
+            27%  { transform: translate(calc(var(--x) * 0.26), calc(var(--y) * 0.0625)) rotate(calc(var(--r) * 0.28)); }
+            43%  { transform: translate(calc(var(--x) * 0.5), calc(var(--y) * 0.25)) rotate(calc(var(--r) * 0.49)); }
+            60%  { transform: translate(calc(var(--x) * 0.75), calc(var(--y) * 0.5625)) rotate(calc(var(--r) * 0.71)); }
+            76%  { transform: translate(var(--x), var(--y)) rotate(calc(var(--r) * 0.93)); animation-timing-function: ease-out; }
+            84%  { transform: translate(var(--x), calc(var(--y) * 0.94)) rotate(calc(var(--r) * 0.97)); animation-timing-function: ease-in; }
+            91%  { transform: translate(var(--x), var(--y)) rotate(calc(var(--r) * 0.99)); animation-timing-function: ease-out; }
+            96%  { transform: translate(var(--x), calc(var(--y) * 0.985)) rotate(var(--r)); animation-timing-function: ease-in; }
+            100% { transform: translate(var(--x), var(--y)) rotate(var(--r)); }
         }
     </style>
 </head>
 <body>    
     <main>
         <p>
-            生死去来 <br>
-            棚頭傀儡 <br>
-            一線断時 <br>
-            落落磊磊
+            <span style="--t:5.06s;--d:0.96s;--x:-59px;--r:52deg;--y:calc(50vh + 21px)">生</span><span style="--t:5.00s;--d:0.89s;--x:38px;--r:-38deg;--y:calc(50vh - 17px)">死</span><span style="--t:5.33s;--d:0.96s;--x:-38px;--r:88deg;--y:calc(50vh + 17px)">去</span><span style="--t:5.13s;--d:0.96s;--x:77px;--r:-14deg;--y:calc(50vh + 19px)">来</span><br>
+            <span style="--t:5.47s;--d:0.89s;--x:-94px;--r:27deg;--y:calc(50vh - 16px)">棚</span><span style="--t:5.21s;--d:0.80s;--x:3px;--r:-66deg;--y:calc(50vh - 80px)">頭</span><span style="--t:5.63s;--d:0.80s;--x:49px;--r:41deg;--y:calc(50vh - 76px)">傀</span><span style="--t:5.38s;--d:0.91s;--x:-97px;--r:-95deg;--y:calc(50vh - 12px)">儡</span><br>
+            <span style="--t:5.09s;--d:0.77s;--x:131px;--r:19deg;--y:calc(50vh - 93px)">一</span><span style="--t:5.72s;--d:0.77s;--x:-101px;--r:-47deg;--y:calc(50vh - 97px)">線</span><span style="--t:5.27s;--d:0.83s;--x:-3px;--r:73deg;--y:calc(50vh - 61px)">断</span><span style="--t:5.54s;--d:0.78s;--x:-79px;--r:-23deg;--y:calc(50vh - 91px)">時</span><br>
+            <span style="--t:5.17s;--d:0.67s;--x:114px;--r:61deg;--y:calc(50vh - 156px)">落</span><span style="--t:5.68s;--d:0.77s;--x:-66px;--r:-81deg;--y:calc(50vh - 100px)">落</span><span style="--t:5.43s;--d:0.74s;--x:118px;--r:34deg;--y:calc(50vh - 116px)">磊</span><span style="--t:5.58s;--d:0.67s;--x:7px;--r:-57deg;--y:calc(50vh - 152px)">磊</span>
         </p>
     </main>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"3b9ad7331e754039948ce59cd5546ebb","r":1,"spa":2}' crossorigin="anonymous"></script>
