@@ -50,11 +50,16 @@
         }
 
         main {
-            animation: appear 2s ease 0.3s backwards;
+            animation: appear 2s ease 0.3s backwards,
+                       vanish 1.5s ease 14s forwards;
         }
 
         @keyframes appear {
             from { opacity: 0; }
+        }
+
+        @keyframes vanish {
+            to { opacity: 0; }
         }
 
         span {
